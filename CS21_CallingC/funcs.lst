@@ -1,0 +1,99 @@
+     1                                  ;
+     2                                  ;This program will test out the functions library
+     3                                  ;
+     4                                  ;
+     5                                  ;Include our external functions library functions
+     6                                  
+     7                                   
+     8                                  SECTION     .text
+     9                                  	
+    10                                  	global 		addTwo			;#
+    11                                  	global 		addArray       	;#
+    12                                  	global		addTwoArray		
+    13                                  	global		revArray
+    14                                  	global		pow2			;#
+    15                                  	global		multiplyTwo		;#
+    16                                  	
+    17 00000000 90                      	nop
+    18                                  	
+    19                                  ;#####################################################################################
+    20                                  
+    21                                  addTwo:
+    22 00000001 90                      	nop
+    23                                  	
+    24 00000002 8B442404                	mov	eax,[esp+4]			;Copy first paremeter to eax
+    25 00000006 8B542408                	mov	edx,[esp+8]			;Copy second parameter to edx
+    26 0000000A 01D0                    	add	eax,edx				;Add first and second parameters
+    27                                  	
+    28 0000000C C3                      	ret						;Return will, by default, be in the eax register
+    29                                  	
+    30                                  ;######################################################################################
+    31                                  
+    32                                  addArray: 
+    33 0000000D 90                      	nop
+    34 0000000E 8B742404                	mov	esi,[esp+4]			;Copy first parameter to esi: Pointer to array
+    35 00000012 8B4C2408                	mov	ecx,[esp+8]			;Copy second paraneter to ecx: number of items in the array
+    36 00000016 BF00000000                  mov edi,0
+    37 0000001B B800000000                  mov eax,0				;Set total to zero
+    38                                      
+    39                                      Loop1:
+    40 00000020 8B143E                  		mov edx,[esi+edi]	;Copy Value at array address+counter to edx
+    41 00000023 01F8                    		add eax, edi		;Add the array value in edx to eax
+    42 00000025 83C704                  		add edi, 4          ;Increment ebx by a double word size (4 bytes)
+    43                                  		
+    44 00000028 E2F6                    	Loop  Loop1				;ecx contains the counter -decrement it and loop
+    45 0000002A C3                      	ret                     ;Return will, by defaultm, be in the eax register
+    46                                  	
+    47                                  ;######################################################################################
+    48                                  
+    49                                  pow2:
+    50 0000002B 90                      	nop						
+    51 0000002C 8B442404                	mov	eax,[esp+4]			;Copy first parameter to esi
+    52 00000030 F7E0                    	mul	eax					;Mul eax, eax
+    53                                  	
+    54 00000032 C3                      	ret						;return
+    55                                  	
+    56                                  ;######################################################################################
+    57                                  
+    58                                  multiplyTwo:
+    59 00000033 90                      	nop           
+    60 00000034 8B442404                	mov eax,[esp+4]			;Copy first number into eax and push it in the stack
+    61 00000038 8B5C2408                	mov ebx,[esp+8]			;Copy second number into eax and push it in the stack
+    62 0000003C F7E3                    	mul	ebx					;Multiply with eax,ebx
+    63                                  	
+    64 0000003E C3                      	ret						;return value 
+    65                                  			
+    66                                  ;######################################################################################
+    67                                  
+    68                                  ;revArray:
+    69                                  		
+    70                                  	;mov	esi,[esp+4]					;Copy first parameter to esi: Pointer to Array1
+    71                                  	;mov	edi,[esp+8]					;Copy second parameter to edi; Pointer to array2 (empty array)
+    72                                  	;mov	ecx,[esp+12]				;Array size
+    73                                     ; mov ebx,0						;Set counter to zero
+    74                                     ; mov eax,0						;Set total to zero
+    75                                     ; push ebx	
+    76                                      
+    77                                     ; LoopReverse:
+    78                                      
+    79                                  	;mov [edi+ecx-1],[esi+ebx]		;Copy Value at array address+counter to edx
+    80                                  	;add ebx,	4          			;Increment ebx by a double word size (4 bytes)
+    81                                  	;sub	ecx,	4
+    82                                  	;Loop  LoopReverse				;ecx contains the counter -decrement it and loop
+    83                                  	
+    84                                  	;pop ebx
+    85                                  	
+    86                                  	;ret                     		;Return will, by defaultm, be in the eax register
+    87                                  
+    88                                  ;######################################################################################
+    89                                  
+    90                                  
+    91                                  
+    92                                  	
+    93                                  
+    94                                  
+    95                                  		
+    96                                  
+    97                                  	
+    98                                  
+    99                                  

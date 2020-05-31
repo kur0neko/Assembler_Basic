@@ -1,0 +1,6 @@
+#!/bin/bash
+# ./build
+#this wil build automatic
+nasm -g -f elf32 -F dwarf funcs.asm -l funcs.lst
+nasm -g -f elf32 -F dwarf main.asm 	-l main.lst
+ld -melf_i386 -o main main.o funcs.o

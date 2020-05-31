@@ -1,0 +1,16 @@
+     1                                  global	addTwo
+     2                                  
+     3                                  addTwo:
+     4 00000000 90                      	nop
+     5                                  
+     6 00000001 67488B442410            	mov	rax,[esp+16]
+     7 00000007 67488B542418            	mov rdx,[esp+24]
+     8 0000000D 4801D0                  	add	rax,rdx
+     9                                  
+    10 00000010 C3                      	ret
+    11                                  	
+    12                                  				
+    13                                  	
+    14                                  ;
+    15                                  ;Setup the registers for exit and poke the kernel
+    16                                  ;Exit: 

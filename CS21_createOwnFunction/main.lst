@@ -1,0 +1,59 @@
+     1                                  ;
+     2                                  ;Example program to execute 64-bit functions in Linux
+     3                                  ;
+     4                                  
+     5                                  ;
+     6                                  ;Include our external functions library functions
+     7                                  %include "./funcs.inc"
+     1                              <1> 
+     2                              <1> ;Include file for the functions library
+     3                              <1> 
+     4                              <1> ;Example Usage:
+     5                              <1> ;call DisplayText
+     6                              <1> ;call DisplayText
+     7                              <1> ;Display input contents
+     8                              <1> ;ECX will have contents string
+     9                              <1> ;EDX will contain the length of string
+    10                              <1> ;call DisplayText
+    11                              <1> 
+    12                              <1> 
+    13                              <1> extern		DisplayText
+    14                              <1> 
+    15                              <1> ;Example Usage:
+    16                              <1> ;call Printendl
+    17                              <1> 
+    18                              <1> extern	 	Displayendl
+    19                              <1> 
+    20                              <1> 
+     8                                  bits 32
+     9                                   
+    10                                  SECTION .data
+    11                                   
+    12 00000000 594F21205761737375-     	welcomePrompt	db	"YO! Wassup!", 00h
+    12 00000009 702100             
+    13                                  		.len equ($-welcomePrompt)
+    14                                  	
+    15                                  
+    16                                  		
+    17                                  SECTION .bss
+    18                                  
+    19                                   
+    20                                  SECTION     .text
+    21                                  	global  _start
+    22                                       
+    23                                  _start:
+    24                                  
+    25 00000000 B9[00000000]            	mov		ecx, welcomePrompt
+    26                                  	
+    27 00000005 BA0C000000              	mov		edx, welcomePrompt.len
+    28                                  	
+    29 0000000A E8(00000000)            	call	DisplayText
+    30                                  	
+    31 0000000F E8(00000000)            	call	Displayendl
+    32                                  
+    33                                  	
+    34 00000014 90                      nop
+    35                                  	
+    36 00000015 B801000000              	mov		eax,1							;What are we going to do? Exit!
+    37 0000001A BB00000000              	mov		ebx,0							;Return code
+    38 0000001F CD80                    	int		80h								;Poke the kernel
